@@ -2,7 +2,6 @@ import os #New
 import pkgutil
 import importlib
 import sys
-#import multiprocessing
 from app.commands import CommandHandler, Command
 from dotenv import load_dotenv #New
 import logging #New
@@ -16,6 +15,7 @@ class App:
         load_dotenv() #New
         self.settings = self.load_environment_variables() #New
         self.settings.setdefault('ENVIRONMENT', 'PRODUCTION') #New
+        logging.basicConfig(level=os.environ.get('LOGLEVEL', 'DEBUG')) #sets environnment level using environment var
         self.command_handler = CommandHandler()
 
     def configure_logging(self): #New
@@ -30,6 +30,7 @@ class App:
         settings = {key: value for key, value in os.environ.items()} #New
         logging.info("Environment variables loaded.") #New
         return settings #New
+    
 
     def get_environment_variable(self, env_var: str = 'ENVIRONMENT'): #New
         return self.settings.get(env_var, None) #New
@@ -55,7 +56,7 @@ class App:
             if isinstance(item, type) and issubclass(item, Command) and item is not Command:
                 # Command names are now explicitly set to the plugin's folder name
                 self.command_handler.register_command(plugin_name, item())
-                logging.info(f"Commaned '{plugin_name}' from plugin '{plugin_name}' registered.")
+                logging.info(f"Command '{plugin_name}' from plugin '{plugin_name}' registered.")
 
     def start(self):
         # Register commands here
@@ -74,10 +75,9 @@ class App:
                     logging.info("User Selected Multiply.")
                 if cmd_input.lower() == 'divide':
                     logging.info("User Selected Divide.")
-                self.command_handler.execute_command(cmd_input)
-                
+                self.command_handler.execute_command(cmd_input)           
         except KeyboardInterrupt:
-            logging.info("Program Terminated.")
+            logging.warn("Program Terminated.")
             sys.exit(0)   # Assuming a KeyboardInterrupt should also result in a clean exit.
         finally:
             logging.info("Application shutdown.")

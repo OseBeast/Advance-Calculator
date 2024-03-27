@@ -1,6 +1,5 @@
 #Installs Python dependencies, run tests and lint with a single version of Python
 
-
 name: Python application
 
 on:
