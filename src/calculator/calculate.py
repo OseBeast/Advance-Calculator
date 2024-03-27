@@ -1,3 +1,4 @@
+import logging
 '''calcluate script'''
 class Calculate:
     '''calculate class'''
