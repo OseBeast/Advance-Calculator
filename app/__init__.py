@@ -1,39 +1,39 @@
-import os #New
+import os 
 import pkgutil
 import importlib
 import sys
 from app.commands import CommandHandler, Command
-from dotenv import load_dotenv #New
-import logging #New
-import logging.config #New
+from dotenv import load_dotenv 
+import logging 
+import logging.config 
 
 
 class App:
     def __init__(self): # Constructor
-        os.makedirs('logs', exist_ok=True)#New
-        self.configure_logging()#New
-        load_dotenv() #New
-        self.settings = self.load_environment_variables() #New
-        self.settings.setdefault('ENVIRONMENT', 'PRODUCTION') #New
+        os.makedirs('logs', exist_ok=True)
+        self.configure_logging()
+        load_dotenv() 
+        self.settings = self.load_environment_variables() 
+        self.settings.setdefault('ENVIRONMENT', 'PRODUCTION') 
         logging.basicConfig(level=os.environ.get('LOGLEVEL', 'DEBUG')) #sets environnment level using environment var
         self.command_handler = CommandHandler()
 
-    def configure_logging(self): #New
-        logging_conf_path = 'logging.conf' #New
-        if os.path.exists(logging_conf_path): #New
-            logging.config.fileConfig(logging_conf_path, disable_existing_loggers=False) #New
-        else: #New
-            logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s') #New
-        logging.info("Logging configured.")   #New
+    def configure_logging(self): 
+        logging_conf_path = 'logging.conf' 
+        if os.path.exists(logging_conf_path): 
+            logging.config.fileConfig(logging_conf_path, disable_existing_loggers=False) 
+        else: 
+            logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s') 
+        logging.info("Logging configured.")   
 
-    def load_environment_variables(self): #New
-        settings = {key: value for key, value in os.environ.items()} #New
-        logging.info("Environment variables loaded.") #New
-        return settings #New
+    def load_environment_variables(self): 
+        settings = {key: value for key, value in os.environ.items()} 
+        logging.info("Environment variables loaded.") 
+        return settings 
     
 
-    def get_environment_variable(self, env_var: str = 'ENVIRONMENT'): #New
-        return self.settings.get(env_var, None) #New
+    def get_environment_variable(self, env_var: str = 'ENVIRONMENT'): 
+        return self.settings.get(env_var, None) 
 
     def load_plugins(self):
         # Dynamically load all plugins in the plugins directory
