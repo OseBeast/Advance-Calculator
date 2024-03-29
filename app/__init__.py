@@ -49,6 +49,21 @@ class App:
                     except TypeError:
                         continue  # If item is not a class or unrelated class, just ignore
 
+    def menu(self):
+
+        menuStr = '''Type the command to select the following:
+                add: Adds two numbers
+                subtract: Subtracts two numbers
+                multiply: Multiplies two numbers
+                divide: Divides two numbers
+                load: Load history from a csv file which will add to the current history
+                save: Save the current history
+                delete: Deletes the history
+                clear: Clears the history from display 
+                exit: Exits out of the program   
+        '''
+        print(menuStr)
+
     def register_plugin_commands(self, plugin_module, plugin_name):
         for item_name in dir(plugin_module):
             item = getattr(plugin_module, item_name)
@@ -63,6 +78,8 @@ class App:
         logging.info("Application started. Type 'exit' to exit.")
         try:
             while True:  #REPL Read, Evaluate, Print, Loop
+                self.menu()
+                self.command_handler.execute_command("show_history")
                 cmd_input = input(">>> ").strip()
                 if cmd_input.lower() == 'exit':
                     logging.info("User Exited Application.")

@@ -11,7 +11,6 @@ def add(a,b):
     '''store history of add operations and return value'''
     #History.store_calculation(past_calc, a, "+", b, number_cruncher.add(a,b))
     past_calc.store_calculation(a, "+", b, number_cruncher.add(a,b))
-    print(past_calc.get_history()) 
     return number_cruncher.add(a,b)
 
 @staticmethod
@@ -56,3 +55,13 @@ def save_history(filename):
 def delete_history():
     ''' clears history for tests'''
     past_calc.delete_history()
+
+@staticmethod
+def clear_history():
+    ''' clears history for tests'''
+    past_calc.clear_history()
+
+@staticmethod
+def show_history():
+    ''' clears history for tests'''
+    past_calc.show_history()
