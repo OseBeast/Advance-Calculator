@@ -15,13 +15,12 @@ class App:
         load_dotenv() 
         self.settings = self.load_environment_variables() 
         self.settings.setdefault('ENVIRONMENT', 'PRODUCTION') 
-        logging.basicConfig(level=os.environ.get('LOGLEVEL', 'DEBUG')) #sets environnment level using environment var
         self.command_handler = CommandHandler()
 
     def configure_logging(self): 
         logging_conf_path = 'logging.conf' 
         if os.path.exists(logging_conf_path): 
-            logging.config.fileConfig(logging_conf_path, disable_existing_loggers=False) 
+            logging.config.fileConfig(logging_conf_path, disable_existing_loggers=False) #sets environnment level using environment var
         else: 
             logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s') 
         logging.info("Logging configured.")   

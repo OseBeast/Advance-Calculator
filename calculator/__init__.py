@@ -9,7 +9,9 @@ number_cruncher = Calculate()
 @staticmethod
 def add(a,b):
     '''store history of add operations and return value'''
-    History.store_calculation(past_calc, a, "+", b, number_cruncher.add(a,b))
+    #History.store_calculation(past_calc, a, "+", b, number_cruncher.add(a,b))
+    past_calc.store_calculation(a, "+", b, number_cruncher.add(a,b))
+    print(past_calc.get_history()) 
     return number_cruncher.add(a,b)
 
 @staticmethod
@@ -39,3 +41,18 @@ def get_history():
 def clear_history():
     ''' clears history for tests'''
     past_calc.clear_history()
+
+@staticmethod
+def load_history(filename):
+    ''' clears history for tests'''
+    past_calc.load_history(filename)
+
+@staticmethod
+def save_history(filename):
+    ''' clears history for tests'''
+    past_calc.save_history(filename)
+
+@staticmethod
+def delete_history():
+    ''' clears history for tests'''
+    past_calc.delete_history()
