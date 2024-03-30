@@ -1,0 +1,6 @@
+,value1,symbol,value2,result
+0,2,+,2,4.0
+1,2,-,2,0.0
+2,3,*,3,9.0
+3,9,/,3,3.0
+4,9,/,0,Error: Cannot divide by zero

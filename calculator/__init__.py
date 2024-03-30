@@ -65,3 +65,8 @@ def clear_history():
 def show_history():
     ''' clears history for tests'''
     past_calc.show_history()
+
+@staticmethod
+def get_dataframe():
+    ''' clears history for tests'''
+    return past_calc.get_dataframe()

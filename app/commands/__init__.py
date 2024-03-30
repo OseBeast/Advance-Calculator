@@ -6,13 +6,17 @@ class Command(ABC):
     def execute(self):
         pass
 
+
+'''Class that is used to handle commands made by the user. This makes it so the pluggins can be activated seamlessly'''
 class CommandHandler:
     def __init__(self):
         self.commands = {}
 
+    #This is used to register the commands for later use
     def register_command(self, command_name: str, command: Command):
         self.commands[command_name] = command
 
+    #This will execute the command selected by user.
     def execute_command(self, command_name: str):
         """ Look before you leap (LBYL) - Use when its less likely to work
         if command_name in self.commands:

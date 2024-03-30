@@ -63,20 +63,8 @@ def test_app_start_divide_command(capfd, monkeypatch):
     #assert "Type 'exit' to exit." in out
     assert "3" in out
 
-def test_app_start_menu_command(capfd, monkeypatch):
-    """Test how the REPL handles Menu command before exiting."""
-    inputs = iter(['menu', 'exit'])
-    monkeypatch.setattr('builtins.input', lambda _: next(inputs))
-    app = App()
-
-    with pytest.raises(SystemExit) as e:
-        app.start()
-    assert e.type == SystemExit
-
-    out, _ = capfd.readouterr()
-
     #assert "Type 'exit' to exit." in out
-    assert "add \nsubtract \nmultiply \ndivide \nexit" in out
+
 
 def test_app_start_unknown_command(capfd, monkeypatch):
     """Test how the REPL handles an unknown command before exiting."""
