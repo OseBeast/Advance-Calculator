@@ -3,7 +3,7 @@ from calculator import subtract
 import logging 
 
 
-
+#Plugin used for handler to execute the correct algorithm for subtracting
 class SubtractCommand(Command):
     def execute(self):
         try:

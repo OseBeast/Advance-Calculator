@@ -2,7 +2,7 @@ from app.commands import Command
 from calculator import divide
 import logging 
 
-
+#Plugin used for handler to execute the correct algorithm for dividing
 class DivideCommand(Command):
     def execute(self):
         try:

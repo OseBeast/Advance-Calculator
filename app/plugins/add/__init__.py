@@ -3,7 +3,7 @@ from calculator import add
 import logging 
 
 
-#command used 
+#Plugin used for handler to execute the correct algorithm for adding
 class AddCommand(Command):
     def execute(self):
         val1= input("Enter value one:")

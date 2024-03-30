@@ -2,7 +2,7 @@ from app.commands import Command
 from calculator import multiply
 import logging 
 
-
+#Plugin used for handler to execute the correct algorithm for multiplying
 class MultiplyCommand(Command):
     def execute(self):
         try:

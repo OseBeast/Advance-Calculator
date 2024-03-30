@@ -7,8 +7,9 @@ from dotenv import load_dotenv
 import logging 
 import logging.config 
 
-
+#This is the main class that holds all of the architecture of the code
 class App:
+    #initializes the settings of the commands, logging and environment variables
     def __init__(self): # Constructor
         os.makedirs('logs', exist_ok=True)
         self.configure_logging()
@@ -17,6 +18,7 @@ class App:
         self.settings.setdefault('ENVIRONMENT', 'PRODUCTION') 
         self.command_handler = CommandHandler()
 
+    #This configures the logging class so that is can log into app.log
     def configure_logging(self): 
         logging_conf_path = 'logging.conf' 
         if os.path.exists(logging_conf_path): 
@@ -24,7 +26,7 @@ class App:
         else: 
             logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s') 
         logging.info("Logging configured.")   
-
+    
     def load_environment_variables(self): 
         settings = {key: value for key, value in os.environ.items()} 
         logging.info("Environment variables loaded.") 
@@ -48,7 +50,7 @@ class App:
                             self.register_plugin_commands(plugin_module, plugin_name)
                     except TypeError:
                         continue  # If item is not a class or unrelated class, just ignore
-
+    #Main menu display
     def menu(self):
 
         menuStr = '''Type the command to select the following:
@@ -64,6 +66,7 @@ class App:
         '''
         print(menuStr)
 
+    #Used to pair commands with the plugins
     def register_plugin_commands(self, plugin_module, plugin_name):
         for item_name in dir(plugin_module):
             item = getattr(plugin_module, item_name)
@@ -72,11 +75,13 @@ class App:
                 self.command_handler.register_command(plugin_name, item())
                 logging.info(f"Command '{plugin_name}' from plugin '{plugin_name}' registered.")
 
+    #The beginning of the program
     def start(self):
         # Register commands here
         self.load_plugins()
         logging.info("Application started. Type 'exit' to exit.")
         try:
+            #Main program loop for user interaction
             while True:  #REPL Read, Evaluate, Print, Loop
                 self.menu()
                 self.command_handler.execute_command("show_history")

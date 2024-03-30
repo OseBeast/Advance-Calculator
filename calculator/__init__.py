@@ -5,6 +5,7 @@ past_calc = History()
 
 number_cruncher = Calculate()
 
+#Static functions used to preserve user histoy and call the computational function
 
 @staticmethod
 def add(a,b):
