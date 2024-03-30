@@ -30,9 +30,9 @@ jobs:
     - name: Test with pytest
       run: |
         pytest
-      name: Test with pytest --pylint
+    -  name: Test with pytest --pylint
       run: |
         pytest  --pylint
-      name: Test with pytest --pylint --cov
+    -  name: Test with pytest --pylint --cov
       run: |
         pytest --pylint --cov
